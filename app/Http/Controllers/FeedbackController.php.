@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class FeedbackController extends Controller
+{
+    public function create()
+    {
+        return view('feedback.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validate the input
+        $request->validate([
+            'question1' => 'required',
+            'question2' => 'required',
+            'question3' => 'required',
+            'openQuestion' => 'required|string|max:500',
+        ]);
+
+        // Here you can handle the feedback, e.g., save it to the database or send an email
+        // Feedback::create($request->all());
+
+        return redirect('/feedback')->with('success', 'Feedback submitted successfully!');
+    }
+}
